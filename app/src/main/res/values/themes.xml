@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.MmpManpower" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/navy_950</item>
+        <item name="android:navigationBarColor">@color/navy_950</item>
+    </style>
+</resources>

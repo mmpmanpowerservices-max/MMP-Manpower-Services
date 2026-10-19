@@ -937,19 +937,23 @@ export const CORPORATE_EXPOSURE = [
 // Official National Support Team & Address (from Brochure Images 1 & 3)
 export const OFFICIAL_SUPPORT_TEAM = {
   organizationName: 'MMP Manpower Services',
-  tagline: 'Building Careers • Growing Businesses • Connecting Opportunities',
-  secondaryTagline: 'Empowering Bharat\'s Growth with Integrity and Trust',
+  tagline: 'YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.',
+  primaryTagline: 'YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.',
+  secondaryTagline: 'Building Careers • Growing Businesses • Connecting Opportunities',
+  tertiaryTagline: 'Empowering Bharat\'s Growth with Integrity and Trust',
   phonePrimary: '+91 99008 72399',
   phoneSecondary: '+91 94499 40097',
+  whatsapp: '+91 99008 72399',
   email: 'mmpmanpowerservices@gmail.com',
   website: 'www.mmpmanpowerservices.com',
   headOfficeAddress:
     '#199, 1st Main, 7th Cross, B Block, Forest Office Road, Devaraj Urs Layout, Davanagere - 577006, Karnataka, India',
   raichurOfficeAddress:
     'MMP Regional Operations Desk, Station Road, Raichur - 584101, Karnataka, India',
+  workingHours: 'Monday – Saturday: 9:00 AM – 7:00 PM IST',
   nationalPresence: 'Serving Pan-India • Karnataka & National Network',
-  motto: 'Harbingers of a New Bharat',
-  copyright: '© 2026 MMP MANPOWER SERVICES | HARBINGERS OF A NEW BHARAT',
+  motto: 'YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.',
+  copyright: '© 2026 MMP MANPOWER SERVICES | YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.',
 };
 
 // Strategic Service Models (Brochure Image 1)

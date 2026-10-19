@@ -1,0 +1,13 @@
+<resources>
+    <color name="navy_950">#040918</color>
+    <color name="navy_900">#0A1128</color>
+    <color name="navy_800">#0F1C42</color>
+    <color name="gold_500">#D4AF37</color>
+    <color name="gold_400">#F5D061</color>
+    <color name="gold_300">#FFE685</color>
+    <!-- Tiranga Wing & Jewel Colors -->
+    <color name="saffron_500">#FF671F</color>
+    <color name="saffron_600">#E65100</color>
+    <color name="green_500">#046A38</color>
+    <color name="green_400">#10B981</color>
+</resources>

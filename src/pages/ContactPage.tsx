@@ -12,12 +12,15 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { MmpLogo } from '../components/common/MmpLogo';
+import { LogoModal } from '../components/common/LogoModal';
+import { OFFICIAL_SUPPORT_TEAM } from '../data/mockData';
 
 interface Props {
   setActivePage: (page: string) => void;
 }
 
 export const ContactPage: React.FC<Props> = ({ setActivePage }) => {
+  const [logoModalOpen, setLogoModalOpen] = useState(false);
   const [form, setForm] = useState({
     name: '',
     phone: '+91 ',
@@ -41,7 +44,11 @@ export const ContactPage: React.FC<Props> = ({ setActivePage }) => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 flex flex-col items-center">
-        <div className="p-3 bg-gradient-to-b from-[#0c183d] via-[#050c20] to-[#020510] rounded-2xl border border-[#d4af37]/60 shadow-lg shadow-amber-950/30">
+        <div
+          onClick={() => setLogoModalOpen(true)}
+          className="p-3.5 bg-gradient-to-b from-[#0c183d] via-[#050c20] to-[#020510] rounded-2xl border-2 border-[#d4af37]/70 shadow-lg shadow-amber-950/30 cursor-pointer hover:scale-105 transition-transform"
+          title="Click to view official logo and download brand kit"
+        >
           <MmpLogo size="md" showText={false} />
         </div>
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0a1432] border border-[#d4af37]/40 text-[#f5d061] text-xs font-bold font-mono">
@@ -50,9 +57,18 @@ export const ContactPage: React.FC<Props> = ({ setActivePage }) => {
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 font-heading">
           Contact MMP Manpower Services
         </h1>
+        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black tracking-widest uppercase font-mono">
+          YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.
+        </div>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto">
           Reach our recruitment desk, employer relations managers, or grievance support team in Davanagere and Raichur, Karnataka.
         </p>
+        <button
+          onClick={() => setLogoModalOpen(true)}
+          className="text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-3.5 py-1.5 rounded-xl cursor-pointer transition-colors"
+        >
+          Official Insignia, Heraldry & Download Brand Kit →
+        </button>
       </div>
 
       {/* Contact Cards Row */}
@@ -111,35 +127,33 @@ export const ContactPage: React.FC<Props> = ({ setActivePage }) => {
 
       {/* Office Locations */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-8 border border-slate-800 space-y-4">
-          <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
-            <Building className="w-5 h-5" />
-            <span>Davanagere Operational Hub</span>
+        <div className="bg-gradient-to-br from-[#0c183d] to-[#040817] text-white rounded-3xl p-8 border border-[#d4af37]/40 shadow-xl space-y-4">
+          <div className="flex items-center gap-2 text-[#f5d061] font-bold text-sm">
+            <Building className="w-5 h-5 text-[#d4af37]" />
+            <span>Head Office — Davanagere</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            Davanagere Branch Office<br />
-            Industrial & Technical Recruitment Operations<br />
-            Davanagere, Karnataka - 577002, India
+          <p className="text-xs text-slate-300 leading-relaxed font-mono">
+            {OFFICIAL_SUPPORT_TEAM.headOfficeAddress}
           </p>
-          <div className="pt-2 text-xs text-slate-400 space-y-1">
-            <div>Helpline: +91 99008 72399</div>
-            <div>Focus: Electronics Assembly, IT, Telecom, Retail Banking</div>
+          <div className="pt-2 text-xs text-slate-300 space-y-1">
+            <div>Helpline: <a href={`tel:${OFFICIAL_SUPPORT_TEAM.phonePrimary}`} className="text-[#f5d061] hover:underline font-mono">{OFFICIAL_SUPPORT_TEAM.phonePrimary}</a></div>
+            <div>Focus: Industrial & Technical Staffing, IT, Banking, Retail, Skill Certification</div>
+            <div className="text-amber-200/70 text-[11px]">Working Hours: {OFFICIAL_SUPPORT_TEAM.workingHours}</div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-8 border border-slate-800 space-y-4">
-          <div className="flex items-center gap-2 text-blue-400 font-bold text-sm">
-            <Building className="w-5 h-5" />
-            <span>Raichur Operating Center</span>
+        <div className="bg-gradient-to-br from-[#0c183d] to-[#040817] text-white rounded-3xl p-8 border border-[#d4af37]/40 shadow-xl space-y-4">
+          <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+            <Building className="w-5 h-5 text-emerald-400" />
+            <span>Regional Operations Desk — Raichur</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            Raichur Regional Office<br />
-            Agro-Logistics, Industrial & Staffing Services<br />
-            Raichur, Karnataka - 584101, India
+          <p className="text-xs text-slate-300 leading-relaxed font-mono">
+            {OFFICIAL_SUPPORT_TEAM.raichurOfficeAddress}
           </p>
-          <div className="pt-2 text-xs text-slate-400 space-y-1">
-            <div>Helpline: +91 94499 40097</div>
-            <div>Focus: Agro-Warehousing, Factory Labor, Skilled Trades</div>
+          <div className="pt-2 text-xs text-slate-300 space-y-1">
+            <div>Phone: <a href={`tel:${OFFICIAL_SUPPORT_TEAM.phoneSecondary}`} className="text-emerald-400 hover:underline font-mono">{OFFICIAL_SUPPORT_TEAM.phoneSecondary}</a></div>
+            <div>Focus: Agro-Logistics, Industrial & Staffing Services, Skilled Trades</div>
+            <div className="text-amber-200/70 text-[11px]">Working Hours: {OFFICIAL_SUPPORT_TEAM.workingHours}</div>
           </div>
         </div>
       </div>
@@ -238,6 +252,9 @@ export const ContactPage: React.FC<Props> = ({ setActivePage }) => {
           </div>
         )}
       </div>
+
+      {/* Official Insignia & Brand Spec Modal */}
+      <LogoModal isOpen={logoModalOpen} onClose={() => setLogoModalOpen(false)} />
     </div>
   );
 };

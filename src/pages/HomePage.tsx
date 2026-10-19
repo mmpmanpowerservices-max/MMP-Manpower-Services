@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
   Shield,
@@ -23,6 +23,7 @@ import {
   Compass,
 } from 'lucide-react';
 import { MmpLogo } from '../components/common/MmpLogo';
+import { LogoModal } from '../components/common/LogoModal';
 import { useApp } from '../context/AppContext';
 import { CORPORATE_EXPOSURE } from '../data/mockData';
 
@@ -33,6 +34,7 @@ interface Props {
 
 export const HomePage: React.FC<Props> = ({ setActivePage }) => {
   const { jobs } = useApp();
+  const [logoModalOpen, setLogoModalOpen] = useState(false);
   const featuredJobs = jobs.slice(0, 4);
 
   return (
@@ -46,13 +48,24 @@ export const HomePage: React.FC<Props> = ({ setActivePage }) => {
         <div className="relative max-w-7xl mx-auto">
           {/* Centered Brand Emblem Badge */}
           <div className="flex flex-col items-center justify-center text-center mb-8">
-            <div className="p-4 sm:p-6 bg-gradient-to-b from-[#0e1e47] via-[#060c20] to-[#020510] rounded-3xl border-2 border-[#d4af37]/70 shadow-2xl shadow-amber-950/60 mb-5 hover:scale-105 transition-all duration-300 relative group flex items-center justify-center">
+            <div
+              onClick={() => setLogoModalOpen(true)}
+              className="p-4 sm:p-6 bg-gradient-to-b from-[#0e1e47] via-[#060c20] to-[#020510] rounded-3xl border-2 border-[#d4af37]/70 shadow-2xl shadow-amber-950/60 mb-4 hover:scale-105 transition-all duration-300 relative group flex items-center justify-center cursor-pointer"
+              title="Click to view full brand specification and download official logos"
+            >
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#d4af37]/25 via-transparent to-[#d4af37]/20 pointer-events-none" />
               <MmpLogo size="hero" showText={false} withContainer={false} />
             </div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0a1432] border border-[#d4af37]/50 text-[#f5d061] text-xs font-black tracking-wide shadow-md mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span>OFFICIAL MMP MANPOWER SERVICES RECRUITMENT PORTAL</span>
+
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-2">
+              <button
+                onClick={() => setLogoModalOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0a1432] hover:bg-[#0f2150] border border-[#d4af37]/60 text-[#f5d061] text-xs font-black tracking-wide shadow-md transition-all cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
+                <span>OFFICIAL MMP MANPOWER SERVICES ROYAL INSIGNIA</span>
+                <span className="text-[10px] text-amber-200/90 font-normal underline ml-1">View Details & Download Kit</span>
+              </button>
             </div>
             <p className="text-xs sm:text-sm font-bold tracking-widest text-amber-200/90 uppercase font-mono">
               Empowering Bharat's Growth with Integrity and Trust
@@ -61,8 +74,11 @@ export const HomePage: React.FC<Props> = ({ setActivePage }) => {
 
           {/* Main Heading in Radiant Gold Foil */}
           <div className="text-center max-w-4xl mx-auto space-y-4">
+            <div className="inline-block px-4 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#f5d061] text-xs font-black tracking-widest uppercase font-mono">
+              YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.
+            </div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight uppercase font-heading bg-gradient-to-r from-white via-amber-100 to-[#f5d061] bg-clip-text text-transparent">
-              BUILDING CAREERS. GROWING BUSINESSES. CONNECTING OPPORTUNITIES.
+              BUILDING CAREERS • GROWING BUSINESSES • CONNECTING OPPORTUNITIES
             </h1>
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
               MMP Manpower Services connects job seekers and businesses through professional recruitment, skilled & unskilled manpower, and comprehensive staffing solutions across Karnataka and PAN-India.
@@ -476,6 +492,9 @@ export const HomePage: React.FC<Props> = ({ setActivePage }) => {
           </div>
         </div>
       </section>
+
+      {/* Official Insignia & Brand Spec Modal */}
+      <LogoModal isOpen={logoModalOpen} onClose={() => setLogoModalOpen(false)} />
     </div>
   );
 };

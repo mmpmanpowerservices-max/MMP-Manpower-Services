@@ -20,6 +20,7 @@ import {
   Search,
 } from 'lucide-react';
 import { MmpLogo } from './MmpLogo';
+import { LogoModal } from './LogoModal';
 import { GlobalSearch } from './GlobalSearch';
 import { useApp, UserViewMode } from '../../context/AppContext';
 
@@ -34,6 +35,7 @@ export const Header: React.FC<Props> = ({ activePage, setActivePage }) => {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [candidateDropdown, setCandidateDropdown] = useState(false);
   const [employerDropdown, setEmployerDropdown] = useState(false);
+  const [logoModalOpen, setLogoModalOpen] = useState(false);
 
   const navigateTo = (page: string) => {
     setActivePage(page);
@@ -77,9 +79,20 @@ export const Header: React.FC<Props> = ({ activePage, setActivePage }) => {
             </a>
           </div>
 
-          {/* Role / Portal Switcher */}
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-amber-200/70 hidden sm:inline font-medium">Portal Access:</span>
+          {/* Brand & Logo Kit + Role / Portal Switcher */}
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => setLogoModalOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#d4af37]/20 hover:bg-[#d4af37]/35 border border-[#d4af37]/60 text-[#f5d061] text-[11px] font-black cursor-pointer transition-all shadow-xs"
+              title="View Official Royal Insignia, Heraldry & Download Media Kit"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
+              <span className="hidden sm:inline">Official Logo & Details</span>
+              <span className="sm:hidden">Logo & Details</span>
+            </button>
+
+            <span className="text-[11px] text-amber-200/70 hidden lg:inline font-medium">Portal:</span>
             <div className="flex items-center bg-[#0d1b3e] rounded-lg p-0.5 border border-[#d4af37]/40 text-[11px]">
               <button
                 type="button"
@@ -160,7 +173,10 @@ export const Header: React.FC<Props> = ({ activePage, setActivePage }) => {
                   MANPOWER SERVICES
                 </span>
               </div>
-              <span className="text-amber-200/80 font-medium tracking-tight text-[9px] sm:text-[10px] hidden sm:block">
+              <span className="text-[#f5d061] font-bold tracking-tight text-[8px] sm:text-[9.5px] uppercase font-mono hidden sm:block">
+                YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.
+              </span>
+              <span className="text-amber-200/70 font-medium tracking-tight text-[8px] hidden md:block">
                 Building Careers • Growing Businesses • Connecting Opportunities
               </span>
             </div>
@@ -658,6 +674,16 @@ export const Header: React.FC<Props> = ({ activePage, setActivePage }) => {
               Contact MMP
             </button>
             <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setLogoModalOpen(true);
+              }}
+              className="w-full text-left px-3 py-2 rounded-lg bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#f5d061] font-black flex items-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-[#d4af37]" />
+              <span>Official Logo, Heraldry & Details</span>
+            </button>
+            <button
               onClick={() => navigateTo('admin-erp')}
               className="w-full text-left px-3 py-2 rounded-lg bg-[#0e1d44] border border-[#d4af37]/40 text-[#f5d061] font-black"
             >
@@ -666,6 +692,9 @@ export const Header: React.FC<Props> = ({ activePage, setActivePage }) => {
           </div>
         </div>
       )}
+
+      {/* Official Insignia & Brand Specification Modal */}
+      <LogoModal isOpen={logoModalOpen} onClose={() => setLogoModalOpen(false)} />
     </header>
   );
 };

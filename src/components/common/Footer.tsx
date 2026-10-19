@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Phone,
   Mail,
@@ -11,13 +11,16 @@ import {
   Award,
 } from 'lucide-react';
 import { MmpLogo } from './MmpLogo';
-import { OFFICIAL_GOOGLE_FORMS } from '../../data/mockData';
+import { LogoModal } from './LogoModal';
+import { OFFICIAL_GOOGLE_FORMS, OFFICIAL_SUPPORT_TEAM } from '../../data/mockData';
 
 interface Props {
   setActivePage: (page: string) => void;
 }
 
 export const Footer: React.FC<Props> = ({ setActivePage }) => {
+  const [logoModalOpen, setLogoModalOpen] = useState(false);
+
   const navigateTo = (page: string) => {
     setActivePage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -65,7 +68,13 @@ export const Footer: React.FC<Props> = ({ setActivePage }) => {
           {/* Brand & About Column */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <MmpLogo size="md" showText={false} />
+              <div
+                onClick={() => setLogoModalOpen(true)}
+                className="cursor-pointer hover:scale-105 transition-transform"
+                title="Click to view official logo and download brand kit"
+              >
+                <MmpLogo size="md" showText={false} />
+              </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <span className="font-heading font-black tracking-wider uppercase text-white text-lg">
@@ -75,36 +84,55 @@ export const Footer: React.FC<Props> = ({ setActivePage }) => {
                     MANPOWER SERVICES
                   </span>
                 </div>
-                <span className="text-amber-200/80 font-medium tracking-tight text-[10px]">
+                <span className="text-[#f5d061] font-bold tracking-tight text-[8.5px] uppercase font-mono">
+                  YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS.
+                </span>
+                <span className="text-amber-200/80 font-medium tracking-tight text-[9px]">
                   Building Careers • Growing Businesses • Connecting Opportunities
                 </span>
               </div>
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm mt-3">
-              A premier national employment, recruitment, and workforce development organisation dedicated to creating large-scale job opportunities across India. Headquartered out of Davangere, Karnataka, MMP operates with a steadfast mission to empower youth through employment support, skill development, and tailored staffing solutions.
+              A premier national employment, recruitment, and workforce development organisation dedicated to creating large-scale job opportunities across India. Headquartered in Davanagere, Karnataka, MMP operates with a steadfast mission to empower youth through employment support, skill development, and tailored staffing solutions.
             </p>
 
             <div className="pt-2 text-xs text-slate-300 space-y-2">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <span>
-                  <strong>Head Office:</strong> Davangere – 577006, Karnataka, India • Pan-India Network
+                  <strong>Head Office:</strong> {OFFICIAL_SUPPORT_TEAM.headOfficeAddress}
+                </span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span>
+                  <strong>Regional Desk:</strong> {OFFICIAL_SUPPORT_TEAM.raichurOfficeAddress}
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
                 <span>
-                  <a href="tel:+919900872399" className="hover:text-[#f5d061] font-mono">+91 99008 72399</a> /{' '}
-                  <a href="tel:+919449940097" className="hover:text-[#f5d061] font-mono">+91 94499 40097</a>
+                  <a href={`tel:${OFFICIAL_SUPPORT_TEAM.phonePrimary}`} className="hover:text-[#f5d061] font-mono">{OFFICIAL_SUPPORT_TEAM.phonePrimary}</a> /{' '}
+                  <a href={`tel:${OFFICIAL_SUPPORT_TEAM.phoneSecondary}`} className="hover:text-[#f5d061] font-mono">{OFFICIAL_SUPPORT_TEAM.phoneSecondary}</a>
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#d4af37] shrink-0" />
-                <a href="mailto:mmpmanpowerservices@gmail.com" className="hover:text-[#f5d061]">
-                  mmpmanpowerservices@gmail.com
+                <a href={`mailto:${OFFICIAL_SUPPORT_TEAM.email}`} className="hover:text-[#f5d061]">
+                  {OFFICIAL_SUPPORT_TEAM.email}
                 </a>
               </div>
+            </div>
+
+            <div className="flex items-center gap-2 pt-1">
+              <button
+                onClick={() => setLogoModalOpen(true)}
+                className="px-3 py-1.5 rounded-xl bg-[#0a1432] hover:bg-[#0f2150] border border-[#d4af37]/40 text-[#f5d061] text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <span>Official Logo & Heraldry</span>
+                <span className="text-[10px] text-amber-200/70 underline">Download Kit</span>
+              </button>
             </div>
 
             <div className="p-3 bg-[#0a1432] rounded-2xl border border-[#d4af37]/30 text-[11px] text-slate-300">
@@ -298,7 +326,7 @@ export const Footer: React.FC<Props> = ({ setActivePage }) => {
         {/* Bottom Bar */}
         <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            © 2026 MMP Manpower Services • Harbingers of a New Bharat. All rights reserved.
+            © 2026 MMP Manpower Services • YOUR WORKFORCE. OUR STRENGTH. YOUR SUCCESS. All rights reserved.
           </div>
           <div className="flex items-center gap-4 text-[11px] text-slate-400">
             <span>www.mmpmanpowerservices.com</span>
@@ -311,6 +339,9 @@ export const Footer: React.FC<Props> = ({ setActivePage }) => {
           </div>
         </div>
       </div>
+
+      {/* Official Insignia & Brand Spec Modal */}
+      <LogoModal isOpen={logoModalOpen} onClose={() => setLogoModalOpen(false)} />
     </footer>
   );
 };
